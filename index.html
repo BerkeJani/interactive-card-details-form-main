@@ -1,51 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./logic.js" defer></script>
+
   <title>Frontend Mentor | Interactive card details form</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
+
 <body>
+  <main class="main-content">
+    <div class="left-column">
+      <div class="card-pictures-wrapper">
+        <div class="card-front">
+          <div class="card-logo">
+            <img src="./images/card-logo.svg" alt="card-logo">
+          </div>
+          <h3 id="card-number">
+            0000 0000 0000 0000
+          </h3>
+          <div class="name-exp-wrapper">
+            <p id="name-on-card">
+              Jane Appleseed
+            </p>
+            <p id="date-of-expire">
+              <span id="exp-month">00</span>/<span id="exp-year">00</span>
+            </p>
+          </div>
 
-  0000 0000 0000 0000
-  Jane Appleseed
-  00/00
+        </div>
+        <div class="card-back">
+          <p id="cvc-code">
+            000
+          </p>
+        </div>
+      </div>
+    </div>
 
-  000
+    <div class="right-column">
+      <div id="card-form" class="card-form-wrapper">
+        <form id="card-form" class="card-form" autocomplete="on" name="card-form">
+          <label for="cardholder-name-input" class="form-label">
+            Cardholder Name
+          </label>
 
-  Cardholder Name
-  e.g. Jane Appleseed
+          <input type="text" onkeyup="updateData('name-on-card',this)" id="cardholder-name-input" class="form-input"
+            placeholder=" e.g. Jane Appleseed" required pattern="^[a-zA-Z\s]+$"
+            oninvalid="this.setCustomValidity('Please enter a valid name here')" oninput="this.setCustomValidity('')">
 
-  Card Number
-  e.g. 1234 5678 9123 0000
+          <label for="card-number-input" class="form-label">
+            Card Number
+          </label>
 
-  Exp. Date (MM/YY)
-  MM
-  YY
+          <input type="text" onkeyup="updateData('card-number',this)" id="card-number-input" class="form-input"
+            placeholder="e.g. 1234 5678 9123 0000" required pattern="[0-9]{16}$"
+            oninvalid="this.setCustomValidity('Please enter a valid bankcard number here (16 digits)')"
+            oninput="this.setCustomValidity('')">
 
-  CVC
-  e.g. 123
+          <div class="exp-cvc-wrapper">
+            <div class="exp-wrapper">
+              <label for="expire-date-month" class="form-label">
+                Exp. Date (MM/YY)
+              </label>
 
-  Confirm
+              <input type="number" onchange="updateData('exp-month',this)" id="expire-date-month" class="form-input"
+                placeholder="MM" required min="1" max="12"
+                oninvalid="this.setCustomValidity('Please enter a month (1-12)')" oninput="this.setCustomValidity('')">
 
-  <!-- Completed state start -->
+              <input type="number" onchange="updateData('exp-year',this)" id="expire-date-year" class="form-input"
+                placeholder="YY" required min="24" max="50"
+                oninvalid="this.setCustomValidity('Please enter a valid year (last two digits)')"
+                oninput="this.setCustomValidity('')">
+            </div>
 
-  Thank you!
-  We've added your card details
-  Continue
-  
+            <div class="cvc-wrapper">
+              <label for="cvc-input" class="form-label">
+                CVC
+              </label>
+
+              <input type="text" onkeyup="updateData('cvc-code',this)" id="cvc-input" class="form-input"
+                placeholder=" e.g. 123" pattern="[0-9]{3}$" required
+                oninvalid="this.setCustomValidity('Please enter a valid CVC code (3 digits)')"
+                oninput="this.setCustomValidity('')">
+            </div>
+          </div>
+          <input type="submit" class="form-button" value="Confirm"></button>
+        </form>
+      </div>
+      <div id="success-screen">
+        <img id="icon-complete" src="./images/icon-complete.svg" alt="icon-complete">
+        <h1 class="success-thank">
+          Thank you!
+        </h1>
+        <p class="success-message">
+          We've added your card details
+        </p>
+        <a href="https://www.linkedin.com/in/janos-berke5/">
+          <button class="form-button">Continue</button>
+        </a>
+      </div>
+    </div>
+  </main>
+
   <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="https://www.linkedin.com/in/janos-berke5/">Berke Janos</a>.
   </div>
 </body>
+
 </html>
